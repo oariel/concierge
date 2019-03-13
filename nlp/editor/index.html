@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Edit Schema</title>
+
+  <link href="/editor/dist/jsoneditor.css" rel="stylesheet" type="text/css">
+  <script src="/editor/dist/jsoneditor.js"></script>
+
+  <script src="https://bgrins.github.io/filereader.js/filereader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+
+  <style>
+    html, body {
+      font-family: "DejaVu Sans", sans-serif;
+    }
+    #jsoneditor {
+      width: 800px;
+      height: 600px;
+    }
+  </style>
+
+</head>
+<body>
+<h1>Concierge Schema Editor - <label id="rootName"></label></h1>
+<p>
+  Available documents: <select id="documentName"></select>
+  <input type="button" id="loadDocument" value="Load"/>
+</p>
+<p>
+  <input type="button" id="removeDocument" value="Remove" />&nbsp;
+  <input type="button" id="newDocument" value="New" />&nbsp;
+  <input type="button" id="saveDocument" value="Save" />&nbsp;
+  <input type="button" id="train" value="Train" />&nbsp;
+</p>
+
+<div id="jsoneditor"></div>
+
+<p>
+<label id="fileNameDisplay"></label> : <label id="statusMessage"></label>
+</p>
+
+<p>
+  © Copyright 2011-2019&nbsp;<a href='https://www.capriza.com/privacy-policy/'>Privacy Policy</a>
+</p>
+
+<script>
+
+  var currentFile = "";
+
+  // Load data in JSON format
+  function execNLP(file, method, data, callback) {
+      var xobj = new XMLHttpRequest();
+      xobj.open(method, file, true);
+      xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+              // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+              callback(xobj.responseText);
+          }
+          if (xobj.status != "200" )
+            throw new Error("Error reading input file (Return status=" + xobj.status + ")");
+      };
+      xobj.setRequestHeader("Content-Type","application/json");
+      xobj.setRequestHeader("Access-Control-Allow-Origin", "*");
+      xobj.send(JSON.stringify(data));
+  }
+
+  var cfInfo = {};
+
+  function reload() {
+
+      execNLP ('/info', 'GET', null, function(response) {
+          cfInfo = JSON.parse(response);
+          document.getElementById("rootName").innerHTML = cfInfo.root;
+
+          // List all the files
+          execNLP ('/list', 'GET', null, function(response) {
+              var select = document.getElementById("documentName");
+              select.options.length = 0;
+              var strings = JSON.parse(response);
+              for (var i = 0; i < strings.length; i++) {
+                  var option = document.createElement('option');
+                  option.text = option.value = strings[i];
+                  select.add(option, 0);
+              }
+          });
+
+      });
+  }
+
+  var options = {
+    mode: 'tree',
+    //modes: ['code', 'form', 'text', 'tree', 'view'], // allowed modes
+    modes: ['tree', 'form', 'code'], // allowed modes
+    onError: function (err) {
+      alert(err.toString());
+    },
+    onModeChange: function (newMode, oldMode) {
+      console.log('Mode switched from', oldMode, 'to', newMode);
+    }
+  };
+
+  // create the editor
+  var editor = new JSONEditor(document.getElementById('jsoneditor'), options);
+  var url = window.location.href;
+  var arr = url.split("/");
+  reload();
+
+  document.getElementById("fileNameDisplay").innerHTML = "Select a file name and click 'Load'";
+
+  document.getElementById('loadDocument').onclick = function () {
+     document.getElementById("statusMessage").innerHTML = "Loading document...";
+     currentFile = document.getElementById("documentName").value;
+     execNLP ('/editor/../' + cfInfo.path + '/' + currentFile, 'GET', null, function(response) {
+       document.getElementById("fileNameDisplay").innerHTML = "Showing: " + currentFile;
+       document.getElementById("statusMessage").innerHTML = "Loaded.";
+       editor.setText(response);
+       editor.expandAll();
+     });
+ }
+
+  // Save a JSON document
+  document.getElementById('saveDocument').onclick = function () {
+    var json = editor.get();
+    document.getElementById("statusMessage").innerHTML = "Saving in progress...";
+    execNLP ('/save/' + currentFile, 'PUT', json, function(response) {
+      document.getElementById("fileNameDisplay").innerHTML = "Showing: " + currentFile;
+        document.getElementById("statusMessage").innerHTML = JSON.parse(response).message;
+    });
+  };
+
+  document.getElementById('train').onclick = function () {
+    document.getElementById("statusMessage").innerHTML = 'Training in progress...';
+    execNLP ('/train', 'GET', null, function(response) {
+      document.getElementById("statusMessage").innerHTML = JSON.parse(response).message;
+    });
+  };
+
+  document.getElementById('documentName').onchange = function () {
+      document.getElementById("statusMessage").innerHTML = "Click 'Load' to edit '" + document.getElementById("documentName").value + "'";
+  };
+
+  document.getElementById('removeDocument').onclick = function () {
+    if (currentFile === "") {
+        alert("Please load a file before selecting Remove.")
+        return;
+    }
+    if ( !confirm("Are you sure you want to delete " + currentFile + "?" ) ) return;
+    execNLP ('/remove' + currentFile, 'GET', null, function(response) {
+      currentFile = "";
+      document.getElementById("fileNameDisplay").innerHTML = "Select a file name and click 'Load'";
+      document.getElementById("statusMessage").innerHTML = JSON.parse(response).message;
+      editor.set({});
+      reload();
+    });
+  };
+
+  document.getElementById('newDocument').onclick = function () {
+
+    while (1) {
+        fname = window.prompt("New document name");
+        if ( !fname) return;
+
+        if ( fname.indexOf('.json') == -1 ) {
+            alert('You must specify a .json file name');
+            continue;
+        }
+
+        break;
+    }
+
+    execNLP ('/save/' + fname, 'PUT', {}, function(response) {
+      document.getElementById("statusMessage").innerHTML = JSON.parse(response).message;
+      editor.set({});
+      reload();
+    });
+  };
+
+</script>
+</body>
+</html>

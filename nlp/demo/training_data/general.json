@@ -1,0 +1,134 @@
+[
+    {
+        "fdata": {
+            "title": "Weather forecast",
+            "category": "Info",
+            "steps": [
+                {
+                    "fn_name": "getinput",
+                    "followup": "Place name (city, zip code, country)?",
+                    "variable_name": "@Location"
+                },
+                {
+                    "fn_name": "weather",
+                    "variable_name": "@Location",
+                    "units": "metric"
+                }
+            ]
+        },
+        "phrases": [
+            "weather",
+            "will it rain",
+            "should I wear a coat",
+            "do I need an umbrella"
+        ]
+    },
+    {
+        "fdata": {
+            "title": "Leave Request",
+            "category": "Test",
+            "steps": [
+                {
+                    "fn_name": "select",
+                    "options": [
+                        {
+                            "name": "Vacation",
+                            "value": "Vacation"
+                        },
+                        {
+                            "name": "Maternity Leave",
+                            "value": "Maternity Leave"
+                        },
+                        {
+                            "name": "Sick Leave",
+                            "value": "Sick Leave"
+                        },
+                        {
+                            "name": "Other",
+                            "value": "Other"
+                        }
+                    ]
+                },
+                {
+                    "fn_name": "getinput",
+                    "followup": "What is the reason for the time off?",
+                    "variable_name": "@RequestType"
+                },
+                {
+                    "fn_name": "getinput",
+                    "followup": "When does your time off begin (mm/dd/yyyy)?",
+                    "variable_name": "@StartDate",
+                    "validator": {
+                        "fn": "validator.toDate(x) && validator.isAfter(x)",
+                        "expect": "valid date format i.e. mm/dd/yyyy, older than today's date"
+                    }
+                },
+                {
+                    "fn_name": "getinput",
+                    "followup": "How many days will you be gone for?",
+                    "variable_name": "@Days",
+                    "validator": {
+                        "fn": "validator.isInt(x, {min: 1, max: 90 })",
+                        "expect": "Number of days between 1 and 90"
+                    }
+                },
+                {
+                    "fn_name": "compute",
+                    "code": "var d=new Date('@StartDate'); d.setDate(d.getDate()+@Days); return((d.getMonth()+1)+'/'+d.getDate()+'/'+ d.getFullYear());",
+                    "variable_name": "@EndDate"
+                },
+                {
+                    "fn_name": "output",
+                    "message": "Ok, you are requesting to go on @RequestType from @StartDate and until @EndDate. Are you sure you want to submit this request?",
+                    "style": "bold"
+                },
+                {
+                    "fn_name": "select",
+                    "options": [
+                        {
+                            "name": "Yes",
+                            "value": "Yes, I'm sure"
+                        },
+                        {
+                            "name": "No",
+                            "value": "No, abort!"
+                        }
+                    ]
+                },
+                {
+                    "fn_name": "condition",
+                    "followup": "Are you sure?",
+                    "conditions": [
+                        {
+                            "value": "Yes, I'm sure",
+                            "gotostep": "_submit"
+                        },
+                        {
+                            "value": "*",
+                            "gotostep": "_fin"
+                        }
+                    ]
+                },
+                {
+                    "fn_name": "output",
+                    "message": "Ok, you are requesting to go on @RequestType from @StartDate and until @EndDate. Are you sure you want to submit this request?",
+                    "style": "bold"
+                },
+                {
+                    "id": "_submit",
+                    "fn_name": "output",
+                    "message": "Your request is being processed.",
+                    "style": "bold"
+                }
+            ]
+        },
+        "phrases": [
+            "Leave request",
+            "I need a break",
+            "Vacation request",
+            "I'm tired",
+            "Personal Time Off",
+            "PTO"
+        ]
+    }
+]

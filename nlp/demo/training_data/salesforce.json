@@ -1,0 +1,132 @@
+[
+    {
+        "fdata": {
+            "title": "Show the account team",
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Get Account Name",
+                    "fn_name": "getinput",
+                    "followup": "Account Name?",
+                    "variable_name": "@Account_Name"
+                },
+                {
+                    "name": "Account Team",
+                    "fn_name": "sfquery",
+                    "query": "SELECT Name, Owner.Name, CSM__r.Name, CSE__r.Name from Account WHERE Name LIKE '%@Account_Name%'",
+                    "column_names": {
+                        "Name": "Account Name",
+                        "Owner.Name": "RSM",
+                        "CSM__r.Name": "CSM",
+                        "CSE__r.Name": "CSE"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "account ownership",
+            "show the CSM",
+            "show the RSM",
+            "who is the CSM",
+            "who is the RSM",
+            "show the CSE",
+            "who is the CSE"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Get Account Name",
+                    "followup": "Which account?",
+                    "fn_name": "getinput",
+                    "variable_name": "@Account_Name"
+                },
+                {
+                    "name": "Get Contact Name",
+                    "followup": "What is the contact last name?",
+                    "fn_name": "getinput",
+                    "variable_name": "@Contact_Name"
+                },
+                {
+                    "id": "_contacts",
+                    "name": "Show Account Contacts",
+                    "fn_name": "sfquery",
+                    "max_rows": "3",
+                    "query": "SELECT Account.Name, FirstName, LastName, Title, MobilePhone FROM Contact WHERE LastName LIKE '%@Contact_Name%' AND Account.Name LIKE '%@Account_Name%'",
+                    "column_names": {
+                        "Account.Name": "Account Name",
+                        "FirstName": "First Name",
+                        "LastName": "Last Name",
+                        "MobilePhone": "Mobile Phone"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Find contact",
+            "Lookup contact"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Top negtive needle movers per account",
+                    "fn_name": "sfquery",
+                    "query": "SELECT Account__r.Name, COUNT(Id) FROM Needle_Mover__c WHERE Pos_Neg__c = 'Negative' GROUP BY Account__r.Name ORDER BY COUNT(Id) DESC LIMIT 5",
+                    "column_names": {
+                        "Account__r.Name": "Account Name",
+                        "expr0": "Number of negative needle movers"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Negtive needle movers"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Sales",
+            "steps": [
+                {
+                    "name": "Top grossing reps for the year (by ARR)",
+                    "fn_name": "sfquery",
+                    "query": "SELECT Owner.Name, Sum(ARR__c) from Opportunity WHERE StageName IN ('08A - Closed Won','07A - Won') AND CloseDate = THIS_FISCAL_YEAR GROUP by Owner.Name ORDER BY Sum(TCV__c) DESC LIMIT 5",
+                    "column_names": {
+                        "Owner.Name": "Rep",
+                        "expr0": "ARR Booked"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Top grossing reps",
+            "Top gun",
+            "Top salesperson"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Sales",
+            "steps": [
+                {
+                    "name": "Top 5 SDRs by completed meetings for the current quarter:",
+                    "fn_name": "sfquery",
+                    "query": "select SDR__r.name, count(id) from opportunity where Date_Meeting_Completed__c = THIS_FISCAL_QUARTER group by SDR__r.name order by count(id) desc LIMIT 5",
+                    "column_names": {
+                        "Owner.Name": "SDR",
+                        "expr0": "Completed meetings"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Top SDR",
+            "Completed meetings"
+        ]
+    }
+]

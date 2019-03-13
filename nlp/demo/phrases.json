@@ -1,0 +1,73 @@
+[
+    {
+        "category": "Info",
+        "phrases": [
+            "weather",
+            "will it rain",
+            "should I wear a coat",
+            "do I need an umbrella"
+        ]
+    },
+    {
+        "category": "Test",
+        "phrases": [
+            "Leave request",
+            "I need a break",
+            "Vacation request",
+            "I'm tired",
+            "Personal Time Off",
+            "PTO"
+        ]
+    },
+    {
+        "category": "CS",
+        "phrases": [
+            "account ownership",
+            "show the CSM",
+            "show the RSM",
+            "who is the CSM",
+            "who is the RSM",
+            "show the CSE",
+            "who is the CSE"
+        ]
+    },
+    {
+        "category": "CS",
+        "phrases": [
+            "Find contact",
+            "Lookup contact"
+        ]
+    },
+    {
+        "category": "CS",
+        "phrases": [
+            "Negtive needle movers"
+        ]
+    },
+    {
+        "category": "Sales",
+        "phrases": [
+            "Top grossing reps",
+            "Top gun",
+            "Top salesperson"
+        ]
+    },
+    {
+        "category": "Sales",
+        "phrases": [
+            "Top SDR",
+            "Completed meetings"
+        ]
+    },
+    {
+        "category": "Fun",
+        "phrases": [
+            "fortune cookie",
+            "qotd",
+            "inspiration",
+            "give me some inspiration",
+            "say something interesting",
+            "say something profound"
+        ]
+    }
+]
