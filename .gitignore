@@ -1,0 +1,6 @@
+#OS junk files
+[Tt]humbs.db
+node_modules
+package-lock.json
+db_slackbutton_bot
+**/.DS_Store

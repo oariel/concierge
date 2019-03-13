@@ -197,7 +197,7 @@ var welcome_msg =
     `
 -------------------------------------
       Concierge Slack Chat Bot
- Copyright(c) Capriza, Inc. 2016
+ Copyright(c) Oren Ariel 2019
  Portions Copyright(c) LBNL 2016
  Use -h or --help for argument list
 -------------------------------------`;
@@ -310,7 +310,7 @@ function handle_attachments(att, text, reply_att, callback_id) {
           );
         }
     }
-    
+
     else {
         // Command with attachments - add all attachments and insert a retry button is there's history
         for ( var i=0; att && i<att.attachments.length; i++ ) {
@@ -475,6 +475,7 @@ controller.on('create_bot',function(bot,config) {
       if (!err) {
         trackBot(bot);
       }
+
 
       bot.startPrivateConversation({user: config.createdBy},function(err,convo) {
         if (err) {
