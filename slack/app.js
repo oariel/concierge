@@ -177,21 +177,18 @@ function slackMessageBuilder() {
   };
 }
 
+if ( argv.d ) {
+  process.on('uncaughtException', function(error) {
+      logger.e('EXCEPTION CAUGHT');
+      logger.e(error.stack);
+  });
 
-process.on('uncaughtException', function(error) {
-    logger.e('EXCEPTION CAUGHT');
-    logger.e(error.stack);
-});
-
-process.on('unhandledRejection', function(reason, p) {
-    logger.e('UNHANDLED PROMISE REJECTION');
-    logger.e(reason, p);
-    //logger.log(p.exception.body.toString());
-});
-
-// Self name and Id
-var botId = "";
-var botName = "";
+  process.on('unhandledRejection', function(reason, p) {
+      logger.e('UNHANDLED PROMISE REJECTION');
+      logger.e(reason, p);
+      //logger.log(p.exception.body.toString());
+  });
+}
 
 var welcome_msg =
     `

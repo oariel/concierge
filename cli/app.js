@@ -6,15 +6,17 @@ var colors = require("colors/safe");
 
 const DEFAULT_NLP_ENDPOINT = "http://0.0.0.0:2197";
 
-process.on('uncaughtException', function(error) {
-    console.log('EXCEPTION CAUGHT');
-    console.log(error.stack);
-});
+if ( argv.d ) {
+    process.on('uncaughtException', function(error) {
+        console.log('EXCEPTION CAUGHT');
+        console.log(error.stack);
+    });
 
-process.on('unhandledRejection', function(reason, p) {
-    console.log('UNHANDLED PROMISE REJECTION');
-    console.log(reason, p);
-});
+    process.on('unhandledRejection', function(reason, p) {
+        console.log('UNHANDLED PROMISE REJECTION');
+        console.log(reason, p);
+    });
+}
 
 // Message builder
 function messageBuilder() {
@@ -107,14 +109,14 @@ var welcome_msg =
   `
 -------------------------------------
 CLI NLP Test 
-Copyright(c) Capriza, Inc. 2016
+Copyright(c) Oren Ariel 2019
 Use -h or --help for argument list
 -------------------------------------`;
 
 console.log(welcome_msg);
 
 if (argv.h !== undefined || argv.help !== undefined) {
-  console.log("Usage: node app.js -n NLP endpoint");
+  console.log("Usage: node app.js -n NLP endpoint [-d]");
   process.exit();
 }  
 
