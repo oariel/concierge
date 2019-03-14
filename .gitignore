@@ -4,3 +4,6 @@ node_modules
 package-lock.json
 db_slackbutton_bot
 **/.DS_Store
+**/phrases.json
+**/categories.json
+**/classifier.json
