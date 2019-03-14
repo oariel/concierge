@@ -6,19 +6,21 @@ var key = "4c1c4dc4a5f066a7e705b0564a692433";
 
 function getForecast(loc, key, units, cb) {
 
-  var str;
-  try {
-      var url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + loc + '&mode=json&appid=' + key + "&units=" + units;
-      request('GET', url).done(function (res) {
-          str = res.getBody('utf8');
-          data = JSON.parse(str);
-          return cb(null, data);
-      });
-  } catch(err) {
-      logger.e("Failed to get weather forecast '" + loc + "': " + err);
-      return cb(err, null);
-  }
-
+    var str;
+    var url = 'http://api.openweathermap.org/data/2.5/forecast?q=' + encodeURIComponent(loc) + '&mode=json&appid=' + key + "&units=" + units;
+    request('GET', url)
+        .done(function (res) {
+            try {
+                str = res.getBody('utf8');
+                data = JSON.parse(str);
+                return cb(null, data);    
+            }
+            catch(err) {
+                logger.e("Failed to get weather forecast for '" + loc + "': " + err);
+                 return cb(err, null);
+            }
+        });
+        
 }
 
 

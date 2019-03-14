@@ -193,7 +193,7 @@ if ( argv.d ) {
 var welcome_msg =
     `
 -------------------------------------
-      Concierge Slack Chat Bot
+   Concierge Slack Chat Bot
  Copyright(c) Oren Ariel 2019
  Portions Copyright(c) LBNL 2016
  Use -h or --help for argument list
@@ -543,7 +543,16 @@ controller.on(['direct_message','mention','direct_mention'],function(bot,message
         get_team_nlp_endpoint(message.team, 0, function(nlp_endpoint) {
 
           // Clean the message from any user ids and URLs
-          var user_str = message.text.replace(/\<(.*?)\>/g, "").trim();
+          var user_str = "";
+
+          // Input text contains email? Slack will forward this as <mailto:email|email>
+          if ( message.text.indexOf('mailto:') != -1 ) {
+            var emails = message.text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi);
+            if (emails && emails.length )
+              user_str = emails[0];
+          }
+          else 
+            user_str = message.text.replace(/\<(.*?)\>/g, "").trim();
           logger.log("USER_STR: " + user_str + " USER_EMAIL: " + email);
 
           var bld = new slackMessageBuilder();

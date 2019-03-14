@@ -544,8 +544,13 @@ fns.start_classified = function(args) {
 
             logger.d('HIGH CONFIDENCE CLASSIFIED COMMAND: (' + cfRes.command + ',' + cfRes.param + ',' + (100*cfRes.score).toFixed(1) + '%)');
 
-            // Initlaize arguments
-            args.topic = JSON.parse(cfRes.label);
+            // Get the topic. Make sure the returning JSON is not garbage
+            try {
+              args.topic = JSON.parse(cfRes.label);
+            }            
+            catch(e) {
+              return args.cb(null, args.bld.text('I\'m sorry, but I cannot classify your input phrase.').toSegments());
+            }
 
             var fup = {
                 'cb': args.cb,

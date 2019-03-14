@@ -2,6 +2,7 @@
     {
         "fdata": {
             "title": "Weather forecast",
+            "skip_params": true,
             "category": "Info",
             "steps": [
                 {

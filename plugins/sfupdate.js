@@ -52,7 +52,7 @@ var sfupdate = {
               var findClause = assignVariable(args, args.data.find);
               var updateClause = assignVariable(args, args.data.update);
               try {
-                var res = await doSyncUpdate(objectClause, findClause, updateClause);
+                var res = await doSyncUpdate(conn, objectClause, findClause, updateClause);
               }
               catch (err) {
                 logger.e(err.message);

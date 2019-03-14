@@ -160,6 +160,7 @@ var getinput = {
 
           // Store into variable
           args.variables.push( {name: variable_name, value: param} );
+          
           return cb(null, args);
         }
         catch (err) {

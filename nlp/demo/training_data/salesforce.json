@@ -128,5 +128,55 @@
             "Top SDR",
             "Completed meetings"
         ]
+    },
+    {
+        "fdata": {
+            "title": "Update Zapp status",
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Get Account Name",
+                    "fn_name": "getinput",
+                    "followup": "Account Name?",
+                    "variable_name": "@Account_Name"
+                },
+                {
+                    "name": "Find Zapp by Account Name",
+                    "fn_name": "sfquery",
+                    "query": "SELECT Name, Account__r.Name, Master_AppID__c, Status__c FROM Zapp__c WHERE Account__r.Name LIKE '%@Account_Name%'",
+                    "column_names": {
+                        "Name": "Zapp Name",
+                        "Account__r.Name": "Account Name"
+                    },
+                    "result_column": "Master_AppID__c"
+                },
+                {
+                    "name": "Get Master App ID",
+                    "fn_name": "getinput",
+                    "followup": "Which Master App ID?",
+                    "variable_name": "@Master_AppID"
+                },
+                {
+                    "name": "Get Status Note",
+                    "fn_name": "getinput",
+                    "followup": "Status Note?",
+                    "variable_name": "@Status_Note"
+                },
+                {
+                    "name": "Update Status Notes",
+                    "fn_name": "sfupdate",
+                    "object": "Zapp__c",
+                    "find": {
+                        "Master_AppID__c": "@Master_AppID"
+                    },
+                    "update": {
+                        "Status_Notes__c": "@Status_Note"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Update Zapp Status Note"
+        ]
     }
 ]
