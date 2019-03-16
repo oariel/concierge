@@ -46,14 +46,18 @@ if (argv.h !== undefined || argv.help !== undefined || !argv.c) {
 // Load classifier
 var dir = path.resolve(__dirname);
 var cfSubdir = argv.c;
-if ( cfSubdir != null && cfSubdir != undefined )
+if ( cfSubdir )
   dir += "/" + cfSubdir;
+else {
+  console.log("Invalid classifier directory.")
+  process.exit(1);
+}
 
 var listenPort = DEFAULT_LISTEN_PORT;
 if ( argv.p != undefined )
   listenPort = argv.p;
 
-logger.log("Classifier directory: " + cfSubdir);
+logger.log("Classifier directory: " + dir);
 logger.log("Listen Port: " + listenPort);
 
 // Load classifications

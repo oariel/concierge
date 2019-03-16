@@ -117,7 +117,7 @@ console.log(welcome_msg);
 
 if (argv.h !== undefined || argv.help !== undefined) {
   console.log("Usage: node app.js -n NLP endpoint [-d]");
-  process.exit();
+  process.exit(0);
 }  
 
 // NLP endpoint
@@ -155,7 +155,7 @@ var getCommand = function () {
             console.log(err.Error);
         if ( result ) {
             if ( result.command === 'exit' || result.command == 'quit' )
-                process.exit(1);
+                process.exit(0);
         }
 
         var handler_args = {

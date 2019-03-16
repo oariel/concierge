@@ -6,6 +6,21 @@ var path = require("path");
 var request = require('then-request');
 var logger = require(path.resolve(__dirname, '../lib/logger.js'));
 var plugins = require(path.resolve(__dirname, "./find_plugins.js"));
+var net = require('net');
+var url = require('url');
+
+// test for NLP presence
+function testForNLP(nlpURL) {
+  return new Promise(resolve => {
+    var client = net.connect(url.parse(nlpURL).port, url.parse(nlpURL).hostname, function() {
+      return resolve ("Ok");
+    });
+    client.on('error', function(ex) {
+      logger.e(ex.errno);
+      return resolve(ex.errno);
+    });
+  });
+}
 
 //var events = require(path.resolve(__dirname, './events_mdb.js'));
 
@@ -393,18 +408,18 @@ function is_classifier_busy(cfHost, cb) {
     // Create new user in trial org
     try {
         var url = cfHost + '/isbusy';
-        request('GET', url, {timeout:750}).done(function (rs) {
-          var result = {};
-          result = JSON.parse(rs.getBody('utf8'));
-          cb(result, null);
-        }, function (err) {
-          if (err.timeout) {
-              logger.e("NLP call timeout: classifier is probably busy");
-              cb(true, null);
-          }
-          return cb (null, err);
-        });
-
+        request('GET', url, {timeout:750})
+          .done(function (rs) {
+            try {
+              var result = {};
+              result = JSON.parse(rs.getBody('utf8'));
+              cb(result, null);
+            }
+            catch (err) {
+              logger.log(err);
+              return cb(null, err);
+            }
+          });
     } catch(err) {
         logger.e(err.message);
         return cb (null, err);
@@ -418,11 +433,18 @@ function do_classification(cfHost, phrase, rank, cb) {
     try {
         logger.log("Classifying: " + phrase);
         var url = cfHost + '/classify/' + encodeURIComponent(phrase) + '/' + rank;
-        request('GET', url).done(function (rs) {
-          var result = {};
-          result = JSON.parse(rs.getBody('utf8'));
-          return cb(result, null);
-        });
+        request('GET', url)
+          .done(function (rs) {
+            try {
+              var result = {};
+              result = JSON.parse(rs.getBody('utf8'));
+              return cb(result, null);
+            }
+            catch (err) {
+              logger.log(err);
+              return cb(null, err);
+            }
+          });
     } catch(err) {
         logger.e(err.message);
         return cb (null, err);
@@ -432,20 +454,33 @@ function do_classification(cfHost, phrase, rank, cb) {
 function do_best_match(cfHost, phrase, cb) {
     try {
         var url = cfHost + '/bestmatch/' + encodeURIComponent(phrase);
-        request('GET', url).done(function (rs) {
-          var result = {};
-          result = JSON.parse(rs.getBody('utf8'));
-          return cb(result, null);
-        });
+        request('GET', url)
+          .done(function (rs) {
+            try {
+              var result = {};
+              result = JSON.parse(rs.getBody('utf8'));
+              return cb(result, null);
+            }
+            catch (err) {
+              logger.log(err);
+              return cb(null, err);
+            }
+          });
     } catch(err) {
         logger.e(err.message);
         return cb (null, err);
     }
 }
 
-fns.start_classified = function(args) {
+fns.start_classified = async function(args) {
 
   try {
+
+    // test that NLP microsoervice is up and running (avoid an exception if not available)
+    var status = await testForNLP(args.cf);
+    if ( status != "Ok" ) {
+      return args.cb(null, args.bld.text('I\'m sorry, but at the moment I cannot classify your input phrase: The NLP service is not available (' + status + '). Please try again later. ').toSegments());
+    }
 
     logger.d('HANDLING NEW CLASSIFIED');
 

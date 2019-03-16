@@ -17,7 +17,7 @@ function getForecast(loc, key, units, cb) {
             }
             catch(err) {
                 logger.e("Failed to get weather forecast for '" + loc + "': " + err);
-                 return cb(err, null);
+                return cb(err, null);
             }
         });
         

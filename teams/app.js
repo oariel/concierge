@@ -10,6 +10,7 @@ var team_list = require(path.resolve(__dirname, './teamlist.js'));
 var restify = require('restify');
 var builder = require('botbuilder');
 var teams = require("botbuilder-teams");
+var restifyPlugins = require('restify').plugins;
 
 const EXPIRE_TIMEOUT = 180;
 
@@ -201,8 +202,8 @@ var connector = new teams.TeamsChatConnector({
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
 
-server.use(require('restify-plugins').queryParser());
-server.use(require('restify-plugins').bodyParser());
+server.use(restifyPlugins.queryParser());
+server.use(restifyPlugins.bodyParser());
 
 // this will receive nothing, you can put your tenant id in the list to listen
 connector.setAllowedTenants([]);

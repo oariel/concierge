@@ -1,0 +1,51 @@
+[
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "Hi there! Type a command, choose one of the suggested options of use \"help\" to see the list of categories and phrases I've been trained on. Please visit www.capriza.com to learn about how you can use Capriza to simplify your business and to sign up for a product trial."
+                },
+                {
+                    "fn_name": "suggestion",
+                    "presets": [
+                        "About this demo",
+                        "Help"
+                    ],
+                    "count": "2"
+                },
+                {
+                    "fn_name": "throw",
+                    "followup": "You can also try one of the following options:"
+                }
+            ]
+        },
+        "phrases": [
+            "hi there",
+            "hey there",
+            "hello",
+            "who are you",
+            "good morning",
+            "good evening"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "Goodbye! Remember, I'm always here for you."
+                }
+            ]
+        },
+        "phrases": [
+            "bye",
+            "goodbye",
+            "so long",
+            "adieu",
+            "adios"
+        ]
+    }
+]

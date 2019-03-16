@@ -7,12 +7,14 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node cli/app.js"
   },
   "author": "Oren Ariel",
   "license": "ISC",
   "dependencies": {
     "botbuilder": "^4.3.2",
+    "botbuilder-teams": "^0.2.6",
     "botkit": "^0.7.4",
     "dateformat": "^3.0.3",
     "fs": "0.0.1-security",
@@ -23,11 +25,11 @@
     "moment-timezone": "^0.5.23",
     "mongodb": "^3.1.13",
     "natural": "^0.6.3",
+    "net": "^1.0.2",
     "nodejs-aes256": "^1.0.1",
     "prettyjson": "^1.2.1",
     "prompt": "^1.0.0",
     "restify": "^8.1.0",
-    "restify-plugins": "^1.6.0",
     "then-request": "^6.0.0",
     "validator": "^10.11.0"
   }
