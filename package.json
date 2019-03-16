@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "botbuilder": "^4.3.2",
-    "botbuilder-teams": "^0.2.6",
+    "botbuilder-teams": "^1.0.0",
     "botkit": "^0.7.4",
     "dateformat": "^3.0.3",
     "fs": "0.0.1-security",
@@ -29,7 +29,7 @@
     "nodejs-aes256": "^1.0.1",
     "prettyjson": "^1.2.1",
     "prompt": "^1.0.0",
-    "restify": "^8.1.0",
+    "restify": "^8.1.1",
     "then-request": "^6.0.0",
     "validator": "^10.11.0"
   }

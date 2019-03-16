@@ -53,10 +53,17 @@ else {
   process.exit(1);
 }
 
+// test if classifier directory exists
+if (!fs.existsSync(dir)) {
+  console.log("Classifier directory " + dir + " doesn't exist.")
+  process.exit(1);
+}
+
 var listenPort = DEFAULT_LISTEN_PORT;
 if ( argv.p != undefined )
   listenPort = argv.p;
 
+logger.log("Classifier: " + cfSubdir);
 logger.log("Classifier directory: " + dir);
 logger.log("Listen Port: " + listenPort);
 

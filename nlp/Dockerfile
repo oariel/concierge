@@ -17,9 +17,10 @@ RUN npm install
 COPY . /usr/src/bot/
 
 EXPOSE 7001
+RUN node nlp/trainBot.js -c ${NLP_DIRECTORY} 
 CMD node nlp/nlpsvc.js -c ${NLP_DIRECTORY}
 
 # Replace NLP directory (demo) with actual one
 # Build image: docker image build . -f nlp/Dockerfile --build-arg NLP_DIRECTORY=demo -t orenariel/concierge:nlpsvc-demo
-# Run image (reference mongodb image): docker run -it -p 2197:2197 --name nlpsvc orenariel/concierge:nlpsvc-demo
+# Run image (reference mongodb image): docker run -it -p 2197:2197 --name nlpsvc-demo orenariel/concierge:nlpsvc-demo
 # Push: docker push orenariel/concierge:nlpsvc-demo
