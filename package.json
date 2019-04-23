@@ -13,8 +13,8 @@
   "author": "Oren Ariel",
   "license": "ISC",
   "dependencies": {
-    "botbuilder": "^4.3.2",
-    "botbuilder-teams": "^1.0.0",
+    "botbuilder": "^3.16.0",
+    "botbuilder-teams": "^0.2.6",
     "botkit": "^0.7.4",
     "dateformat": "^3.0.3",
     "fs": "0.0.1-security",
@@ -22,15 +22,15 @@
     "js-combinatorics": "^0.5.4",
     "jsforce": "^1.9.1",
     "minimist": "^1.2.0",
-    "moment-timezone": "^0.5.23",
-    "mongodb": "^3.1.13",
+    "moment-timezone": "^0.5.25",
+    "mongodb": "^3.2.3",
     "natural": "^0.6.3",
     "net": "^1.0.2",
     "nodejs-aes256": "^1.0.1",
     "prettyjson": "^1.2.1",
     "prompt": "^1.0.0",
-    "restify": "^8.1.1",
-    "then-request": "^6.0.0",
+    "restify": "^8.3.0",
+    "then-request": "^6.0.2",
     "validator": "^10.11.0"
   }
 }

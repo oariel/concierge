@@ -1,0 +1,493 @@
+[
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Last Month Runs",
+                    "fn_name": "sfquery",
+                    "query": "SELECT SUM(Last_Month_Runs__c) Last_Month_Runs FROM Zapp__c",
+                    "column_names": {
+                        "Last_Month_Runs": "The total number of runs last month was"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Last month runs"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Last Week Runs",
+                    "fn_name": "sfquery",
+                    "query": "SELECT SUM(Last_Week_Runs__c) Last_Week_Runs FROM Zapp__c",
+                    "column_names": {
+                        "Last_Week_Runs": "The total number of runs last week on Capriza was"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Last week runs"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Last Month Unique Users",
+                    "fn_name": "sfquery",
+                    "query": "SELECT SUM(Last_Month_Unique_Users__c) Last_Month_Unique_Users FROM Zapp__c",
+                    "column_names": {
+                        "Last_Month_Unique_Users": "The total number of unique users last month was"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Last month users"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Last Week Unique Users",
+                    "fn_name": "sfquery",
+                    "query": "SELECT SUM(Last_Week_Unique_Users__c) Last_Week_Unique_Users FROM Zapp__c",
+                    "column_names": {
+                        "Last_Week_Unique_Users": "The total number of unique users last week was"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Last week users"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "fn_name": "sfquery",
+                    "query": "select count(id) from zapp__c where live_status__c = 'Live'",
+                    "column_names": {
+                        "expr0": "The number of live micro-apps is "
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "number of live zapps"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "fn_name": "sfquery",
+                    "query": "select count(id) from account where Live_Zapps__c > 0",
+                    "column_names": {
+                        "expr0": "The number of live customers is "
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "number of live customers"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "fn_name": "sfquery",
+                    "query": "SELECT COUNT(Id) FROM Lead WHERE CreatedDate = LAST_N_DAYS:1 AND Trial_Type__c != ''",
+                    "column_names": {
+                        "expr0": "Total number of trial requests for the last day is"
+                    }
+                },
+                {
+                    "fn_name": "sfquery",
+                    "query": "SELECT COUNT(Id) FROM Lead WHERE CreatedDate = LAST_N_DAYS:1 AND Trial_Type__c = 'designer' AND Trial_Ready__c = false",
+                    "column_names": {
+                        "expr0": "The number of requests waiting for approval is"
+                    }
+                },
+                {
+                    "name": "The list of trial users for the last day are:",
+                    "fn_name": "sfquery",
+                    "query": "SELECT Lead_CreateDate__c, Name, Company, Title, Trial_SE_lookup__r.Name, Trial_Type__c, Trial_Ready__c FROM Lead WHERE CreatedDate = LAST_N_DAYS:1 AND Trial_Type__c != ''",
+                    "column_names": {
+                        "Lead_CreateDate__c": "Date Created",
+                        "Trial_SE_lookup__r.Name": "Assigned To",
+                        "Trial_Type__c": "Trial type",
+                        "Trial_Ready__c": "Trial Started"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Product trials",
+            "Try capriza"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "skip_params": "true",
+            "steps": [
+                {
+                    "name": "List Account Team",
+                    "followup": "Which account?",
+                    "fn_name": "sfquery",
+                    "max_rows": "1",
+                    "query": "SELECT Name, Owner.Name, CSM__r.Name, CSE__r.Name from Account WHERE Name LIKE '%{0}%'",
+                    "column_names": {
+                        "Name": "Account Name",
+                        "Owner.Name": "RSM",
+                        "CSM__r.Name": "CSM",
+                        "CSE__r.Name": "CSE"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Account ownership",
+            "Find CSM",
+            "Find CSE",
+            "Find RSM"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "skip_params": "true",
+            "steps": [
+                {
+                    "name": "Customer Adoption Status",
+                    "followup": "Which company?",
+                    "fn_name": "sfquery",
+                    "query": "SELECT Name, Activity_Runs__c, Activity_Unique_Users__c, Adopted_Zapps__c, All_Zapps_Inactive__c, Live_Zapps__c, Zapps_by_Capriza__c, Zapps_by_Customer__c FROM Account WHERE Name LIKE '%{0}%' and Live_Zapps__c > 0",
+                    "column_names": {
+                        "Name": "Account Name",
+                        "Activity_Runs__c": "Total All-time Runs",
+                        "Activity_Unique_Users__c": "Max Monthly Users"
+                    },
+                    "result_column": "Name"
+                }
+            ]
+        },
+        "phrases": [
+            "Zapps for customer",
+            "Customer activity",
+            "Customer adoption",
+            "Zapps built"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Get Account Name",
+                    "followup": "Which account?",
+                    "fn_name": "getinput",
+                    "variable_name": "@Account_Name"
+                },
+                {
+                    "name": "Get Contact Name",
+                    "followup": "What is the contact last name?",
+                    "fn_name": "getinput",
+                    "variable_name": "@Contact_Name"
+                },
+                {
+                    "id": "_contacts",
+                    "name": "Show Account Contacts",
+                    "fn_name": "sfquery",
+                    "max_rows": "3",
+                    "query": "SELECT Account.Name, FirstName, LastName, Title, MobilePhone FROM Contact WHERE LastName LIKE '%@Contact_Name%' AND Account.Name LIKE '%@Account_Name%'",
+                    "column_names": {
+                        "Account.Name": "Account Name",
+                        "FirstName": "First Name",
+                        "LastName": "Last Name",
+                        "MobilePhone": "Mobile Phone"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Find contact",
+            "Lookup contact"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Top delivery concern creators",
+                    "fn_name": "sfquery",
+                    "query": "SELECT CreatedBy.Name, COUNT(Id) FROM Delivery_Concern__c GROUP BY CreatedBy.Name ORDER BY COUNT(Id) DESC LIMIT 5",
+                    "column_names": {
+                        "CreatedBy.Name": "Reported by",
+                        "expr0": "Number of delivery concerns"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Delivery concerns",
+            "Delivery issues"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Products",
+            "steps": [
+                {
+                    "name": "Top feature request creators",
+                    "fn_name": "sfquery",
+                    "query": "SELECT CreatedBy.Name, COUNT(Id) FROM Feature_Request__c GROUP BY CreatedBy.Name ORDER BY COUNT(Id) DESC LIMIT 3",
+                    "column_names": {
+                        "CreatedBy.Name": "Reported by",
+                        "expr0": "Number of feature requests"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Review feature requests"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "CS",
+            "steps": [
+                {
+                    "name": "Top negtive needle movers per account",
+                    "fn_name": "sfquery",
+                    "query": "SELECT Account__r.Name, COUNT(Id) FROM Needle_Mover__c WHERE Pos_Neg__c = 'Negative' GROUP BY Account__r.Name ORDER BY COUNT(Id) DESC LIMIT 5",
+                    "column_names": {
+                        "Account__r.Name": "Account Name",
+                        "expr0": "Number of negative needle movers"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Negtive needle movers"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Sales",
+            "steps": [
+                {
+                    "name": "Top grossing reps for the year (by ARR)",
+                    "fn_name": "sfquery",
+                    "query": "SELECT Owner.Name, Sum(ARR__c) from Opportunity WHERE StageName IN ('07A - Won','08A - Closed Won') AND CloseDate = THIS_FISCAL_YEAR GROUP by Owner.Name ORDER BY Sum(TCV__c) DESC LIMIT 5",
+                    "column_names": {
+                        "Owner.Name": "Rep",
+                        "expr0": "ARR Booked"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Top grossing reps",
+            "Top gun",
+            "Top salesperson"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Sales",
+            "steps": [
+                {
+                    "name": "Top 5 SDRs by completed meetings for the current quarter:",
+                    "fn_name": "sfquery",
+                    "query": "select SDR__r.name, count(id) from opportunity where Date_Meeting_Completed__c = THIS_FISCAL_QUARTER group by SDR__r.name order by count(id) desc LIMIT 5",
+                    "column_names": {
+                        "Owner.Name": "SDR",
+                        "expr0": "Completed meetings"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Top SDR",
+            "Completed meetings"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Marketing",
+            "steps": [
+                {
+                    "name": "Top 5 lead sources for the current quarter:",
+                    "fn_name": "sfquery",
+                    "query": "select leadsource, count(id) from opportunity where leadsource != null AND closedate = THIS_FISCAL_QUARTER group by leadsource order by count(id) desc limit 5",
+                    "column_names": {
+                        "LeadSource": "Source",
+                        "expr0": "Number of leads"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Top lead sources"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Marketing",
+            "steps": [
+                {
+                    "fn_name": "sfquery",
+                    "query": "select count(id) from lead where mql_date__c = THIS_WEEK",
+                    "column_names": {
+                        "expr0": "Number of MQLs generated this week"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "MQLs this week"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Marketing",
+            "steps": [
+                {
+                    "name": "Opportunities by lead source for this week",
+                    "fn_name": "sfquery",
+                    "query": "select leadsource, count(id) from opportunity where leadsource != null and createddate = THIS_WEEK group by leadsource order by count(id) desc limit 5",
+                    "column_names": {
+                        "LeadSource": "Lead Source",
+                        "expr0": "Opportunities"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Opportunities by lead source"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Sales",
+            "steps": [
+                {
+                    "name": "Last signed deals",
+                    "fn_name": "sfquery",
+                    "query": "select CloseDate, account.name, owner.name, Amount, ARR__c, Days_Open__c from opportunity where stagename IN ('07A - Won','08A - Closed Won') order by closedate desc limit 3",
+                    "column_names": {
+                        "Account.Name": "Account",
+                        "Owner.Name": "Rep",
+                        "CloseDate": "On"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "Last closed deals",
+            "Last won deals",
+            "Last signed deals"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Marketing",
+            "steps": [
+                {
+                    "fn_name": "getinput",
+                    "variable_name": "@LastDate",
+                    "default": "2999-01-01T00:00:00Z"
+                },
+                {
+                    "id": "_story",
+                    "fn_name": "sfquery",
+                    "name": "Here's a customer story for you:",
+                    "query": "SELECT Account__r.Name, Industry__c, Business_Problem__c, Business_Solution__c, CreatedDate from Customer_Story__c WHERE CreatedDate < @LastDate ORDER BY CreatedDate DESC LIMIT 1",
+                    "column_names": {
+                        "Industry__c": "Industry",
+                        "Business_Problem__c": "The business problem",
+                        "Business_Solution__c": "the solution provided was",
+                        "Account__r.Name": "Account",
+                        "CreatedDate": "-"
+                    },
+                    "store": {
+                        "CreatedDate": "@LastDate"
+                    }
+                },
+                {
+                    "fn_name": "select",
+                    "options": [
+                        {
+                            "name": "Next Story",
+                            "value": "Next Story"
+                        },
+                        {
+                            "name": "Quit",
+                            "value": "Quit"
+                        }
+                    ]
+                },
+                {
+                    "fn_name": "condition",
+                    "followup": "Select an option",
+                    "conditions": [
+                        {
+                            "value": "Next Story",
+                            "gotostep": "_story"
+                        },
+                        {
+                            "value": "*",
+                            "gotostep": "_quit"
+                        }
+                    ]
+                },
+                {
+                    "id": "_quit",
+                    "fn_name": "output",
+                    "message": "Done."
+                }
+            ]
+        },
+        "phrases": [
+            "Customer stories",
+            "Customer story",
+            "Success story"
+        ]
+    },
+    {
+        "fdata": {
+            "title": "Customers with most live Zapps",
+            "category": "CS",
+            "steps": [
+                {
+                    "fn_name": "sfquery",
+                    "query": "select account__r.name, count(id) from zapp__c where status__c like '%Live%' group by account__r.name, account__r.Capriza_OrgID__c order by count(id) desc limit 5",
+                    "column_names": {
+                        "account__r.name": "Account",
+                        "expr0": "Live Zapps"
+                    }
+                }
+            ]
+        },
+        "phrases": [
+            "customers with live apps"
+        ]
+    }
+]

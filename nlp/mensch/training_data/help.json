@@ -5,8 +5,8 @@
             "steps": [
                 {
                     "fn_name": "output",
-                    "message": "Following is a list of categories for this demo. Please select one to view the list of phrases I've been trained on. Saying a phrase will invoke a micro-app (a 'Zapp'). Please click on the link below to find out how to build your own catalog of micro-apps using the Capriza Designer",
-                    "link": "http://www.capriza.com"
+                    "message": "Following is a list of categories for this demo. Please select one to view the list of phrases I've been trained on. ",
+                    "link": "http://www.mensch.io"
                 },
                 {
                     "strict": true,

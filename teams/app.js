@@ -181,9 +181,6 @@ var config = {
     'callback_address': process.env.callback_address
 };
 
-if ( !config.callback_address )
-  logger.log("Warning: Callback address is not defined. Background runs are not supported");
-
 // Expire any unprocessed followups
 setInterval(function() {
     message_handlers.expire_followups(EXPIRE_TIMEOUT);

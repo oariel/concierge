@@ -5,7 +5,7 @@
             "steps": [
                 {
                     "fn_name": "output",
-                    "message": "Hi there! Type a command, choose one of the suggested options of use \"help\" to see the list of categories and phrases I've been trained on. Please visit www.capriza.com to learn about how you can use Capriza to simplify your business and to sign up for a product trial."
+                    "message": "Hi there! Type a command, choose one of the suggested options of use \"help\" to see the list of categories and phrases I've been trained on. "
                 },
                 {
                     "fn_name": "suggestion",

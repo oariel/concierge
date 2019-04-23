@@ -2,7 +2,7 @@
     {
         "fdata": {
             "title": "Leave Request",
-            "category": "Test",
+            "category": "HR",
             "steps": [
                 {
                     "fn_name": "select",
