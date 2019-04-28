@@ -1,0 +1,30 @@
+[
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "Following is a list of categories for this demo. Please select one to view the list of phrases I've been trained on. ",
+                    "link": "http://www.spaceiq.com"
+                },
+                {
+                    "strict": true,
+                    "fn_name": "help_categories"
+                },
+                {
+                    "fn_name": "help_item",
+                    "followup": "Category?"
+                },
+                {
+                    "fn_name": "throw"
+                }
+            ]
+        },
+        "phrases": [
+            "categories",
+            "I need help",
+            "help me"
+        ]
+    }
+]

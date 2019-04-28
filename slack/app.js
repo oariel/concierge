@@ -5,6 +5,7 @@ var argv = require('minimist')(process.argv.slice(2));
 var message_handlers = require(path.resolve(__dirname, "../workflow/handlers.js"));
 var logger = require(path.resolve(__dirname, "../lib/logger.js"));
 var Botkit = require('botkit');
+var request = require('then-request');
 var teamList = require(path.resolve(__dirname,'./teamList.js'));
 var url = require('url');
 
@@ -266,14 +267,18 @@ controller.setupWebserver(process.env.port,function(err,webserver) {
       res.send("You've successfully installed this Slack app. You may now close this window.");
     }
   });
+  
 });
 
 // Get a user email
 function find_user_email(bot, userId, cb) {
     bot.api.users.list({}, function(err, m){
+        if ( !m.members ) 
+          return cb(null);
+          
         for ( var i=0; i<m.members.length; i++ ) {
             if ( m.members[i].id == userId )
-                cb (m.members[i].profile.email);
+                return cb (m.members[i].profile.email);
         }
     });
 }
@@ -637,3 +642,4 @@ function handle_message(handler_args) {
         logger.e(err.message);
     }
 }
+

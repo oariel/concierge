@@ -1,0 +1,211 @@
+[
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "This is a demo of Concierge.",
+                    "link": "http://www.mensch.io/"
+                },
+                {
+                    "fn_name": "output",
+                    "message": "To get started, try one of the following commands:"
+                },
+                {
+                    "fn_name": "suggestion",
+                    "presets": [
+                        "Help",
+                        "PTO Request",
+                        "Weather forecast"
+                    ],
+                    "count": "3"
+                },
+                {
+                    "fn_name": "throw",
+                    "followup": "You can also try one of the following options:"
+                }
+            ]
+        },
+        "phrases": [
+            "About this demo"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "African or European?",
+                    "link": "http://style.org/unladenswallow/"
+                }
+            ]
+        },
+        "phrases": [
+            "What is the average airspeed velocity of an unladen swallow?"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "I'm sorry I can't do that."
+                }
+            ]
+        },
+        "phrases": [
+            "open the pod bay doors"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "Baby don't hurt me no more."
+                }
+            ]
+        },
+        "phrases": [
+            "what is love?"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "42."
+                }
+            ]
+        },
+        "phrases": [
+            "what is the meaning of life?"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "I'm very well, thank you for asking!"
+                }
+            ]
+        },
+        "phrases": [
+            "how are you"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "I wasn't programmed for humor. Maybe you'd like one of these:",
+                    "link": "http://www.jupiterscientific.org/sciinfo/jokes/physicsjokes.html"
+                }
+            ]
+        },
+        "phrases": [
+            "tell me a joke"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "Baby don't hurt me no more."
+                }
+            ]
+        },
+        "phrases": [
+            "what is love?"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "Cute kittens right here!",
+                    "link": "https://www.google.com/search?site=&tbm=isch&q=kittens&oq=kittens"
+                }
+            ]
+        },
+        "phrases": [
+            "kittens",
+            "cats",
+            "cute kittens",
+            "show me kittens",
+            "cute",
+            "something cute",
+            "show me something cute"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "Cute puppies!",
+                    "link": "https://www.google.com/search?site=&tbm=isch&q=puppies&oq=puppies"
+                }
+            ]
+        },
+        "phrases": [
+            "puppies",
+            "doggies",
+            "dogs",
+            "cute pups",
+            "i love puppies"
+        ]
+    },
+    {
+        "fdata": {
+            "exclude_from_help": true,
+            "steps": [
+                {
+                    "fn_name": "output",
+                    "message": "I don't know. Let me sleep on it."
+                }
+            ]
+        },
+        "phrases": [
+            "do you love me?",
+            "are you in love?",
+            "do you dream?",
+            "do robots dream?",
+            "what is your favorite color?",
+            "what is your favorite movie?"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Fun",
+            "steps": [
+                {
+                    "fn_name": "fortune"
+                }
+            ]
+        },
+        "phrases": [
+            "fortune cookie",
+            "qotd",
+            "inspiration",
+            "give me some inspiration",
+            "say something interesting",
+            "say something profound"
+        ]
+    }
+]
