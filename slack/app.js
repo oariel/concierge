@@ -246,7 +246,7 @@ if (!process.env.clientId || !process.env.clientSecret || !process.env.port) {
 var controller = Botkit.slackbot({
   clientSigningSecret: process.env.clientSecret,
   // interactive_replies: true, // tells botkit to send button clicks into conversations
-  json_file_store: './db_slackbutton_bot/',
+  json_file_store: path.resolve(__dirname) + '/db_slackbutton_bot/',
   debug: argv.d != undefined,
   // rtm_receive_messages: false, // disable rtm_receive_messages if you enable events api
 }).configureSlackApp(
