@@ -213,6 +213,7 @@ var initFile = "config";
 if ( argv.i != null )
 		initFile = argv.i;
 var dir = path.resolve(__dirname);
+logger.log("Initialaztion file: " + dir + "/" + initFile);
 var config = require(dir + "/" + initFile);
 
 logger.log("Initialization file: " + initFile);
