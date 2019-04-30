@@ -5,8 +5,8 @@
             "steps": [
                 {
                     "fn_name": "output",
-                    "message": "This is a demo of Concierge.",
-                    "link": "http://www.mensch.io/"
+                    "message": "This is a demo of SpaceIQ Concierge.",
+                    "link": "http://www.spaceiq.com/"
                 },
                 {
                     "fn_name": "output",
@@ -16,8 +16,8 @@
                     "fn_name": "suggestion",
                     "presets": [
                         "Help",
-                        "PTO Request",
-                        "Weather forecast"
+                        "Find an employee",
+                        "Find meeting room"
                     ],
                     "count": "3"
                 },

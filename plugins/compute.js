@@ -15,6 +15,7 @@ var compute = {
 
           // get the variable to gather the input into
           var code = args.data.code;
+
           if (code) {
             code = util.parameterize_string(code, args.variables);
             eval("function resolve() {" + code + "}");

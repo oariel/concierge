@@ -178,7 +178,7 @@ function slackMessageBuilder() {
   };
 }
 
-if ( argv.d ) {
+if ( !argv.d ) {
   process.on('uncaughtException', function(error) {
       logger.e('EXCEPTION CAUGHT');
       logger.e(error.stack);

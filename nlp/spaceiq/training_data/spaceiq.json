@@ -1,0 +1,175 @@
+[
+    {
+        "fdata": {
+            "category": "Employees",
+            "steps": [
+                {
+                    "fn_name": "getinput",
+                    "followup": "Which employee are you searching for?",
+                    "variable_name": "@Name"
+                },
+                {
+                    "name": "Search for an employee",
+                    "fn_name": "spaceiqquery",
+                    "graphQL": "{ viewer { company { search(query: \"@Name\", type: employees) { employees(first: 10) { edges { node { name id } } } } } } }",
+                    "result_name": "name",
+                    "result_value": "name"
+                },
+                {
+                    "name": "Employee information",
+                    "fn_name": "spaceiqquery",
+                    "graphQL": "{ viewer { company { search(query: \"{0}}\", type: employees) { employees(first: 10) { edges { node { name department { name } team { name } seat { external_id } secondarySeats { edges { node { external_id } } } hotelingDesks { edges { node { external_id } } } startDate endDate } } } spaces(first: 10) { edges { node { name spaceType externalId spaceInteractivity } } } departments(first: 10) { edges { node { name } } } } } } }",
+                    "followup": "Select from the following employees that match your search"
+                }
+            ]
+        },
+        "phrases": [
+            "Find employee",
+            "Look for an employee"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Spaces",
+            "steps": [
+                {
+                    "fn_name": "getinput",
+                    "followup": "Which space are you searching for?",
+                    "variable_name": "@Name"
+                },
+                {
+                    "fn_name": "compute",
+                    "code": "return ('@Name' == 'all' || '@Name' == 'everyone' ? '%':'@Name')",
+                    "variable_name": "@Space"
+                },
+                {
+                    "name": "Select a room",
+                    "fn_name": "spaceiqquery",
+                    "graphQL": "{ viewer { company { search(query: \"@Space\", type: spaces) { spaces { edges { node { name } } } } } } }",
+                    "result_name": "name",
+                    "result_value": "name"
+                },
+                {
+                    "name": "Room information",
+                    "fn_name": "spaceiqquery",
+                    "graphQL": "{ viewer { company { search(query: \"{0}\", type: spaces) { spaces { edges { node { name spaceType externalId capacity floor { name } spaceInteractivity mapUrl } } } } } } }",
+                    "followup": "Select from the following spaces that match your search"
+                }
+            ]
+        },
+        "phrases": [
+            "Find space",
+            "Find a conference room",
+            "Look for a space"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Spaces",
+            "steps": [
+                {
+                    "name": "Available meeting rooms",
+                    "fn_name": "spaceiqquery",
+                    "graphQL": "{ viewer { company { assignmentPlans { calendars(duration: 60, capacity: 1) { spaces { space { name } dates { start end } availableNow } } } } } }"
+                }
+            ]
+        },
+        "phrases": [
+            "Available meeting rooms"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Reports",
+            "steps": [
+                {
+                    "name": "Run report",
+                    "fn_name": "spaceiqquery",
+                    "graphQL": "{ viewer { company { reports { name id } } } }",
+                    "result_name": "name",
+                    "result_value": "id"
+                },
+                {
+                    "name": "Select report",
+                    "fn_name": "spaceiqquery",
+                    "graphQL": "{ viewer { company { report(name: \"{0}\") { name description category categoryName csvUrl } } } }",
+                    "followup": "Select report to view"
+                }
+            ]
+        },
+        "phrases": [
+            "Run report"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Reports",
+            "steps": [
+                {
+                    "fn_name": "spaceiqreport",
+                    "report_name": "SitesOccupancyReport"
+                }
+            ]
+        },
+        "phrases": [
+            "Occupancy",
+            "How much space do I have left"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Reports",
+            "steps": [
+                {
+                    "fn_name": "spaceiqreport",
+                    "report_name": "OverallSeatsUtilization"
+                }
+            ]
+        },
+        "phrases": [
+            "Seat utilization"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Reports",
+            "steps": [
+                {
+                    "fn_name": "spaceiqreport",
+                    "report_name": "NewHires"
+                }
+            ]
+        },
+        "phrases": [
+            "New hires"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Reports",
+            "steps": [
+                {
+                    "fn_name": "spaceiqreport",
+                    "report_name": "SpacesReport"
+                }
+            ]
+        },
+        "phrases": [
+            "spaces report"
+        ]
+    },
+    {
+        "fdata": {
+            "category": "Reports",
+            "steps": [
+                {
+                    "fn_name": "spaceiqreport",
+                    "report_name": "Buildings"
+                }
+            ]
+        },
+        "phrases": [
+            "buildings report"
+        ]
+    }
+]

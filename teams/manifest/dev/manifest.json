@@ -1,0 +1,36 @@
+{
+  "$schema": "https://statics.teams.microsoft.com/sdk/v1.3/manifest/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.3",
+  "version": "2.0.0",
+  "id": "4523dc02-f256-4662-ba5c-13cd3a87b423",
+  "packageName": "com.CORRECTURL",
+  "developer": {
+    "name": "Oren Ariel",
+    "websiteUrl":    "https://www.capriza.com/msteams-landing-page",
+    "privacyUrl":    "https://www.capriza.com/privacy-policy/",
+    "termsOfUseUrl": "https://www.capriza.com/mla/"
+  },
+  "name": {
+    "short": "Personal Concierge (Dev)"
+  },
+  "description": {
+    "short": "Concierge personal assistant",
+    "full": "Get stuff done by asking the Concierge simple questions"
+  },
+  "icons": {
+    "outline":"outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FACE42",
+  "bots": [
+    {
+      "botId": "4523dc02-f256-4662-ba5c-13cd3a87b423",
+      "needsChannelSelector":  false,
+      "scopes": ["personal", "team"],
+      "supportsFiles": true
+    }
+  ],
+  "validDomains": [
+    "ngrok.io"
+  ]
+}

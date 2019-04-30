@@ -13,9 +13,9 @@
   "author": "Oren Ariel",
   "license": "ISC",
   "dependencies": {
-    "botbuilder": "^3.16.0",
-    "botbuilder-teams": "^1.0.0",
     "botkit": "^0.7.4",
+    "botbuilder": "^3.16.0",
+    "botbuilder-teams": "^0.1.7",
     "dateformat": "^3.0.3",
     "fs": "0.0.1-security",
     "google-stocks": "^2.0.1",
