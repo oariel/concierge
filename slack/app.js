@@ -273,7 +273,7 @@ controller.setupWebserver(process.env.port,function(err,webserver) {
 // Get a user email
 function find_user_email(bot, userId, cb) {
     bot.api.users.list({}, function(err, m){
-        if ( !m.members ) 
+        if ( !m || !m.members ) 
           return cb(null);
           
         for ( var i=0; i<m.members.length; i++ ) {
