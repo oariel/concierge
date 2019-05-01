@@ -18,7 +18,7 @@
                 {
                     "name": "Employee information",
                     "fn_name": "spaceiqquery",
-                    "graphQL": "{ viewer { company { search(query: \"{0}}\", type: employees) { employees(first: 10) { edges { node { name department { name } team { name } seat { external_id } secondarySeats { edges { node { external_id } } } hotelingDesks { edges { node { external_id } } } startDate endDate } } } spaces(first: 10) { edges { node { name spaceType externalId spaceInteractivity } } } departments(first: 10) { edges { node { name } } } } } } }",
+                    "graphQL": "{ viewer { company { search(query: \"{0}\", type: all) { employees(first: 10) { edges { node { name assets{ url(style: \"thumbnail\") } department { name } team { name } seat { external_id code floor { name code } building { name code } } neighborhoods { name floor { id name code } building { name code } } } } } spaces(first: 10) { edges { node { name code externalId capacity assets{ url(style: \"thumbnail\") } department { name } building { name code } floor { name code } } } } } } } }",
                     "followup": "Select from the following employees that match your search"
                 }
             ]
@@ -52,7 +52,7 @@
                 {
                     "name": "Room information",
                     "fn_name": "spaceiqquery",
-                    "graphQL": "{ viewer { company { search(query: \"{0}\", type: all) { employees(first: 10) { edges { node { name assets{ url(style: \"thumbnail\") } department { name } team { name } seat { external_id code floor { name code id } building { name code } } neighborhoods { name floor { id name code } building { name code } } } } } spaces(first: 10) { edges { node { name code externalId capacity assets{ url(style: \"thumbnail\") } department { name } building { name code } floor { name code } } } } } } } }",
+                    "graphQL": "{ viewer { company { search(query: \"{0}\", type: spaces) { spaces { edges { node { name spaceType externalId capacity floor { name } spaceInteractivity mapUrl } } } } } } }",
                     "followup": "Select from the following spaces that match your search"
                 }
             ]
