@@ -52,7 +52,7 @@
                 {
                     "name": "Room information",
                     "fn_name": "spaceiqquery",
-                    "graphQL": "{ viewer { company { search(query: \"{0}\", type: spaces) { spaces { edges { node { name spaceType externalId capacity floor { name } spaceInteractivity mapUrl } } } } } } }",
+                    "graphQL": "{ viewer { company { search(query: \"{0}\", type: all) { employees(first: 10) { edges { node { name assets{ url(style: \"thumbnail\") } department { name } team { name } seat { external_id code floor { name code id } building { name code } } neighborhoods { name floor { id name code } building { name code } } } } } spaces(first: 10) { edges { node { name code externalId capacity assets{ url(style: \"thumbnail\") } department { name } building { name code } floor { name code } } } } } } } }",
                     "followup": "Select from the following spaces that match your search"
                 }
             ]
