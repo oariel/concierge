@@ -9,6 +9,8 @@ var request = require('then-request');
 var teamList = require(path.resolve(__dirname,'./teamList.js'));
 var url = require('url');
 
+const DEFAULT_EXPIRE_INTERVAL_SEC = 180;
+
 function slackMessageBuilder() {
 
   var str = "";
@@ -220,7 +222,7 @@ logger.log("Initialaztion file: " + dir + "/" + initFile);
 var botConfig = {
     'type': 'SLACK',
     'progdir': path.resolve(__dirname),
-    'expire_interval': 180 * 1000,
+    'expire_interval': DEFAULT_EXPIRE_INTERVAL_SEC * 1000,
     'listen_port': 2090,
     'connect_retry_interval': 5 * 1000,
     'cancel_literal': 'Cancel',
@@ -228,15 +230,21 @@ var botConfig = {
     'has_voice': false
 };
 
+// Debug mode
+if ( argv.d ) {
+  botConfig.expire_interval = DEFAULT_EXPIRE_INTERVAL_SEC * 100;
+  logger.log("Expire interval: " + botConfig.expire_interval/1000 + " sec.");
+}
+
 // Expire any unprocessed followups
 setInterval(function() {
-    message_handlers.expire_followups();
+    message_handlers.expire_followups(botConfig.expire_interval/1000);
 
     // Reload team list
     delete require.cache[path.resolve(__dirname,'./teamList.js')];
     teamList = require(path.resolve(__dirname,'./teamList.js'));
 
-}, config.expire_interval);
+}, botConfig.expire_interval/2);
 
 if (!process.env.clientId || !process.env.clientSecret || !process.env.port) {
   logger.log('Error: Specify clientId clientSecret and port in environment');

@@ -332,6 +332,7 @@ fns.complete_followup = function(args, user_str) {
             'step_result': [],
             'next_step': '',
             'variables': followups[conv_id].variables,
+            'timestamp': Math.floor(Date.now() / 1000),
             'bot_config': args.bot_config,
             'linger': false,
             'workflow_name': args.workflow_name,
@@ -603,6 +604,7 @@ fns.start_classified = async function(args) {
                 'workflow_name': args.topic.title
             };
 
+            // Create followup
             followups[args.conv_id] = fup;
 
             // Ignore the parameter if instructed so (for speech based)
