@@ -10,10 +10,9 @@
                 {
                     "fn_name": "suggestion",
                     "presets": [
-                        "About this demo",
                         "Help"
                     ],
-                    "count": "2"
+                    "count": "4"
                 },
                 {
                     "fn_name": "throw",
