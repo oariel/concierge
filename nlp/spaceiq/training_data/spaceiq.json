@@ -37,7 +37,8 @@
         },
         "phrases": [
             "Find employee",
-            "Look for an employee"
+            "Look for an employee",
+            "Find someone"
         ]
     },
     {
@@ -66,7 +67,7 @@
                 {
                     "name": "Room information",
                     "fn_name": "spaceiqquery",
-                    "graphQL": "{ viewer { company { search(query: \"{0}\", type: spaces) { spaces { edges { node { name spaceType externalId capacity floor { name } spaceInteractivity mapUrl } } } } } } }",
+                    "graphQL": "{ viewer { company { search(query: \"{0}\", type: spaces) { spaces { edges { node { name spaceType externalId capacity floor { name } spaceInteractivity } } } } } } }",
                     "step_result": {
                         "name": "externalId",
                         "value": "externalId",
