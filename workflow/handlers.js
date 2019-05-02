@@ -210,8 +210,8 @@ fns.next_followup = function(args) {
               for ( var i=0; i<step_result.length; i++) {
                   args.bld.addActionButton( i.toString(), step_result[i].name, null, type);
               }
-              if ( !followups[conv_id] || (followups[conv_id].current_step > followups[conv_id].steps.length) )
-                args.bld.addActionButton( "-1", args.bot_config.cancel_literal ); // Maximum allowed buttons by slack :(
+              //if ( !followups[conv_id] || (followups[conv_id].current_step > followups[conv_id].steps.length) )
+              args.bld.addActionButton( "-1", args.bot_config.cancel_literal ); // Maximum allowed buttons by slack :(
               return false;
           }
       }

@@ -103,7 +103,7 @@
     },
     {
         "fdata": {
-            "category": "Reports",
+            "category": "Spaces",
             "steps": [
                 {
                     "fn_name": "spaceiqreport",
@@ -118,7 +118,7 @@
     },
     {
         "fdata": {
-            "category": "Reports",
+            "category": "Spaces",
             "steps": [
                 {
                     "fn_name": "spaceiqreport",
@@ -132,7 +132,7 @@
     },
     {
         "fdata": {
-            "category": "Reports",
+            "category": "Employees",
             "steps": [
                 {
                     "fn_name": "spaceiqreport",
@@ -146,7 +146,7 @@
     },
     {
         "fdata": {
-            "category": "Reports",
+            "category": "Spaces",
             "steps": [
                 {
                     "fn_name": "spaceiqreport",
@@ -160,7 +160,7 @@
     },
     {
         "fdata": {
-            "category": "Reports",
+            "category": "Spaces",
             "steps": [
                 {
                     "fn_name": "spaceiqreport",
