@@ -86,12 +86,17 @@ var spaceiqquery = {
                     verticalOutput: true,
                     typeHandlers: {
                         String: function (value, index, parent) {
-                            if ( args.data.result_name && parent.hasOwnProperty(args.data.result_name) && args.data.result_value && parent.hasOwnProperty(args.data.result_value) ) {
+                            var step_result = args.data.step_result;
+                            if ( step_result && step_result.name && parent.hasOwnProperty(step_result.name) && step_result.value && parent.hasOwnProperty(step_result.value) ) {
                                 var found = stepResult.find( element => {
-                                    return element.name === parent[args.data.result_name] && element.value === parent[args.data.result_value ];
+                                    return element.name === parent[step_result.name] && element.value === parent[step_result.value ];
                                 });
                                 if ( !found )
-                                    stepResult.push( {name: parent[args.data.result_name], value: parent[args.data.result_value ]} );
+                                    stepResult.push( {name: parent[step_result.name], value: parent[step_result.value ]} );
+
+                                // Include in the result?
+                                if ( step_result.hasOwnProperty("include") && step_result.include )
+                                    return value;
                             }
                             else
                                 return value;
@@ -105,6 +110,7 @@ var spaceiqquery = {
                         args.bld.text("Sorry. Can't find any matches.").linebreak();
                         return cb('err', args);
                     }
+
 
                     var firstItem = '';
                     var rows = result.split('<EOL>');
@@ -144,6 +150,9 @@ var spaceiqquery = {
                                 label += "/";
                         }
 
+                        // no label - use literal
+                        if ( !label )
+                            label = literal;
                         args.bld.ident().bold(label).text(": ");
 
                         // Hyperlink

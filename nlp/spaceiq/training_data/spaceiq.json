@@ -12,14 +12,26 @@
                     "name": "Search for an employee",
                     "fn_name": "spaceiqquery",
                     "graphQL": "{ viewer { company { search(query: \"@Name\", type: employees) { employees(first: 10) { edges { node { name id } } } } } } }",
-                    "result_name": "name",
-                    "result_value": "name"
+                    "step_result": {
+                        "name": "name",
+                        "value": "name"
+                    }
                 },
                 {
                     "name": "Employee information",
                     "fn_name": "spaceiqquery",
                     "graphQL": "{ viewer { company { search(query: \"{0}\", type: all) { employees(first: 10) { edges { node { name assets{ url(style: \"thumbnail\") } department { name } team { name } seat { external_id code floor { name code } building { name code } } neighborhoods { name floor { id name code } building { name code } } } } } spaces(first: 10) { edges { node { name code externalId capacity assets{ url(style: \"thumbnail\") } department { name } building { name code } floor { name code } } } } } } } }",
+                    "step_result": {
+                        "name": "external_id",
+                        "value": "external_id",
+                        "include": true
+                    },
                     "followup": "Select from the following employees that match your search"
+                },
+                {
+                    "name": "Show map",
+                    "fn_name": "spaceiqquery",
+                    "graphQL": "{ viewer { company { mapAsset(zoom: 2.5, filter:{key:SpaceCode,value:\"{0}\"}){ url } } } }"
                 }
             ]
         },
@@ -46,14 +58,26 @@
                     "name": "Select a room",
                     "fn_name": "spaceiqquery",
                     "graphQL": "{ viewer { company { search(query: \"@Space\", type: spaces) { spaces { edges { node { name } } } } } } }",
-                    "result_name": "name",
-                    "result_value": "name"
+                    "step_result": {
+                        "name": "name",
+                        "value": "name"
+                    }
                 },
                 {
                     "name": "Room information",
                     "fn_name": "spaceiqquery",
                     "graphQL": "{ viewer { company { search(query: \"{0}\", type: spaces) { spaces { edges { node { name spaceType externalId capacity floor { name } spaceInteractivity mapUrl } } } } } } }",
+                    "step_result": {
+                        "name": "externalId",
+                        "value": "externalId",
+                        "include": true
+                    },
                     "followup": "Select from the following spaces that match your search"
+                },
+                {
+                    "name": "Show map",
+                    "fn_name": "spaceiqquery",
+                    "graphQL": "{ viewer { company { mapAsset(zoom: 2.5, filter:{key:SpaceCode,value:\"{0}\"}){ url } } } }"
                 }
             ]
         },
@@ -70,7 +94,18 @@
                 {
                     "name": "Available meeting rooms",
                     "fn_name": "spaceiqquery",
-                    "graphQL": "{ viewer { company { assignmentPlans { calendars(duration: 60, capacity: 1) { spaces { space { name } dates { start end } availableNow } } } } } }"
+                    "graphQL": "{ viewer { company { assignmentPlans { calendars(duration: 60, capacity: 1) { spaces { space { name externalId } dates { start end } availableNow } } } } } }",
+                    "step_result": {
+                        "name": "name",
+                        "value": "externalId",
+                        "include": true
+                    }
+                },
+                {
+                    "name": "Show map",
+                    "fn_name": "spaceiqquery",
+                    "graphQL": "{ viewer { company { mapAsset(zoom: 2.5, filter:{key:SpaceCode,value:\"{0}\"}){ url } } } }",
+                    "followup": "Select a meeting room"
                 }
             ]
         },
@@ -86,8 +121,10 @@
                     "name": "Run report",
                     "fn_name": "spaceiqquery",
                     "graphQL": "{ viewer { company { reports { name id } } } }",
-                    "result_name": "name",
-                    "result_value": "id"
+                    "step_result": {
+                        "name": "name",
+                        "value": "id"
+                    }
                 },
                 {
                     "name": "Select report",

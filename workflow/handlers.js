@@ -184,9 +184,10 @@ fns.next_followup = function(args) {
       }
 
       // Is there a step result from the previous step?
-      var step_result = (n-2>=0) ? followups[conv_id].steps[n-2].step_result : null;
+      var step_result = (n-2>=0 ) ? followups[conv_id].steps[n-2].step_result : null;
 
       if ( step_result && step_result.length > 0 ) {
+
           var str = "Select one of the following options";
           if ( curr_step.topic.hasOwnProperty('followup') )
             str = curr_step.topic.followup;
