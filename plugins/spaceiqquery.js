@@ -47,28 +47,35 @@ var spaceiqquery = {
         try {
             logger.d('Plugin: spaceiqquery');
 
+            if ( !args.data.hasOwnProperty("query") ) {
+                args.bld.text("Configuration error: query not provided.").linebreak();
+                return cb('err', args);
+            }
+
             var literal = args.user_params;
             var stepResult = [];
 
             args.busy();
 
             // Is it a followup?
-            var graphQL = args.data.graphQL.replace('{0}', literal);
-
-            // Query exists?
-            if (graphQL.length == 0) {
-                args.bld.text("Query not defined").linebreak();;
-                return cb('err', args);
-            }
+            var query = args.data.query.replace('{0}', literal);
 
             // Create query object
-            query = {
-                "query": "query " + util.parameterize_string(graphQL, args.variables)
+            var graphQL = {
+                "query": util.parameterize_string(query, args.variables)
             }
 
-            //logger.print_object(query);
+            if ( args.data.hasOwnProperty("input") ) {
+                var input = util.parameterize_object(args.data.input, [ {name: "{0}", value: literal} ]);
+                graphQL.variables = {
+                    "input": util.parameterize_object(input, args.variables)
+                }
+            }
 
-            ret = spaceiq.spaceIQQuery(query, function (err, ret) {
+
+            //logger.print_object(graphQL);
+
+            ret = spaceiq.spaceIQQuery(graphQL, function (err, ret) {
                 if (err) {
                     args.bld.text("SpaceIQ query error").linebreak();
                     return cb('err', args);

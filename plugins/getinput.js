@@ -154,7 +154,14 @@ var getinput = {
 
             if ( !eval(format.fn) ) {
                 logger.log("Input validation " + format.fn + " failed. Expected: " + format.expect + "), Got: " + param);
-                throw new Error("Sorry, but the expected input format is " + format.expect + ".");
+                if ( args.data.hasOwnProperty("id") ) {
+                  logger.log("getinput: NEXT_STEP = " + args.data.id);
+                  args.bld.text("Sorry, but the expected input format is " + format.expect + ".").linebreak();
+                  args.next_step = args.data.id;
+                  return cb(null, args);
+                }
+                else
+                  throw new Error("Sorry, but the expected input format is " + format.expect + ".");
             }
           }
 

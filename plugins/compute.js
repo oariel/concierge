@@ -18,6 +18,7 @@ var compute = {
 
           if (code) {
             code = util.parameterize_string(code, args.variables);
+            logger.log(code);
             eval("function resolve() {" + code + "}");
             var ret = resolve();
             var newVar = args.data.variable_name;
