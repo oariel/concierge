@@ -31,7 +31,7 @@
                 {
                     "name": "Show map",
                     "fn_name": "spaceiqquery",
-                    "query": "query { viewer { company { mapAsset(zoom: 1.5, filter:{key:SpaceCode,value:\"{0}\"}){ url } } } }"
+                    "query": "query { viewer { company { mapAsset(zoom: 2.5, filter:{key:SpaceCode,value:\"{0}\"}){ url } } } }"
                 }
             ]
         },
@@ -78,7 +78,7 @@
                 {
                     "name": "Show map",
                     "fn_name": "spaceiqquery",
-                    "query": "query { viewer { company { mapAsset(zoom: 1.5, filter:{key:SpaceCode,value:\"{0}\"}){ url } } } }"
+                    "query": "query { viewer { company { mapAsset(zoom: 2.5, filter:{key:SpaceCode,value:\"{0}\"}){ url } } } }"
                 }
             ]
         },
@@ -105,7 +105,7 @@
                 {
                     "name": "Show map",
                     "fn_name": "spaceiqquery",
-                    "query": "query { viewer { company { mapAsset(zoom: 1.5, filter:{key:SpaceCode,value:\"{0}\"}){ url } } } }",
+                    "query": "query { viewer { company { mapAsset(zoom: 2.5, filter:{key:SpaceCode,value:\"{0}\"}){ url } } } }",
                     "followup": "Select a meeting room"
                 }
             ]
