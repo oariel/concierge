@@ -81,7 +81,11 @@ var spaceiqquery = {
                     return cb('err', args);
                 }
 
-                //logger.print_object(ret);
+                // Execution error occurred
+                if ( ret.hasOwnProperty("errors") ) {
+                    args.bld.bold(ret.errors[0].message).linebreak();
+                    return cb('err', args);
+                }
 
                 // Format output
                 var options = {
@@ -171,6 +175,7 @@ var spaceiqquery = {
                         args.bld.linebreak();
                     }
 
+                    //logger.print_object(stepResult);
 
                     // add to step result
                     args.step_result = stepResult;

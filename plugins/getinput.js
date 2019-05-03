@@ -83,7 +83,10 @@ var getinput = {
     'fn': function(args, cb) {
 
         try {
-          logger.d('Plugin: getinput');
+          // Adda the input to the variable list
+          var param = args.user_params;
+
+          logger.d('Plugin: getinput (' + param + ')');
 
           // get the variable to gather the input to
           var variable_name = args.data.variable_name;
@@ -92,8 +95,6 @@ var getinput = {
             return cb('err', args);
           }
 
-          // Adda the input to the variable list
-          var param = args.user_params;
 
           // Skip phrases provided?
           if ( args.data.hasOwnProperty("skip_phrases") ) {

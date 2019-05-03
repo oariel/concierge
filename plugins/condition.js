@@ -7,8 +7,8 @@ var condition = {
     'fn': function(args, cb) {
 
         try {
-          logger.d('Plugin: condition');
           var literal = args.user_params;
+          logger.d('Plugin: condition (' + literal + ')');
           for ( var i=0; i<args.data.conditions.length; i++ ) {
             var val = args.data.conditions[i].value;
             if ( val == "*" || val == literal ) {

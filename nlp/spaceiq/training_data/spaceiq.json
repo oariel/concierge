@@ -240,11 +240,16 @@
                     "id": "_getdate",
                     "fn_name": "getinput",
                     "followup": "Which day is your meeting (mm/dd/yyyy hh:mm)?",
-                    "variable_name": "@StartDate",
+                    "variable_name": "@DateInput",
                     "validator": {
                         "fn": "validator.toDate(x) && validator.isAfter(x)",
                         "expect": "valid date format i.e. mm/dd/yyyy hh:mm and older than the current date"
                     }
+                },
+                {
+                    "fn_name": "compute",
+                    "code": "return( new Date('@DateInput').toUTCString() );",
+                    "variable_name": "@StartDate"
                 },
                 {
                     "id": "_gettime",
@@ -258,7 +263,7 @@
                 },
                 {
                     "fn_name": "compute",
-                    "code": "var d=new Date('@StartDate'); d.setMinutes(d.getMinutes()+@Duration); return((d.getMonth()+1)+'/'+d.getDate()+'/'+ d.getFullYear()+' '+d.getHours()+':'+d.getMinutes());",
+                    "code": "var d=new Date('@StartDate'); d.setMinutes(d.getMinutes()+@Duration); return( new Date((d.getMonth()+1)+'/'+d.getDate()+'/'+ d.getFullYear()+' '+d.getHours()+':'+d.getMinutes()) ).toUTCString();",
                     "variable_name": "@EndDate"
                 },
                 {
@@ -303,6 +308,11 @@
                         "end": "@EndDate",
                         "summary": "hello tests"
                     }
+                },
+                {
+                    "fn_name": "output",
+                    "message": "Your meeting was booked successfully",
+                    "style": "bold"
                 }
             ]
         },
