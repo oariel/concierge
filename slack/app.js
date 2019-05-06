@@ -205,7 +205,7 @@ var welcome_msg =
 logger.log(welcome_msg);
 
 if (argv.h !== undefined || argv.help !== undefined) {
-    logger.log("Usage: node botkitSlackApp.js <options>");
+    logger.log("Usage: node app.js <options>");
     logger.log("Options  -i : Initialization file");
     process.exit();
 }

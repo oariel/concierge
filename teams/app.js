@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////
 // Microsoft Bot Framework Bot (teams)
-// Copyright(c) 2011-2017 Capriza, Inc.
+// Copyright(c) 2011-2017 Oren Ariel, Inc.
 //
 var path = require("path");
 var argv = require('minimist')(process.argv.slice(2));
@@ -150,7 +150,7 @@ var welcome_msg =
     `
 -------------------------------------
      Concierge for Teams Bot
- Copyright(c) Capriza, Inc. 2011
+ Copyright(c) Oren Ariel, Inc. 2011
  Portions Copyright(c) LBNL 2016
  Use -h or --help for argument list
 -------------------------------------`;
@@ -158,7 +158,7 @@ var welcome_msg =
 console.log(welcome_msg);
 
 if (argv.h !== undefined || argv.help !== undefined) {
-    console.log("Usage: node teamsBot.js <options>");
+    console.log("Usage: node app.js <options>");
     console.log("Options  -i : Initialization file");
     process.exit();
 }
