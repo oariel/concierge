@@ -1,12 +1,11 @@
 //////////////////////////////////////////////////////////////////
 // Natural Language Classifier object
-// Copyright Capriza, Inc 2011-2017
+// Copyright Oren Ariel, Inc 2019
 //
 var natural = require('natural');
-/*
-stemmer = natural.LancasterStemmer;
-natural.LancasterStemmer.attach();
-*/
+
+//stemmer = natural.LancasterStemmer;
+//natural.LancasterStemmer.attach();
 
 var util = require('util');
 var path = require("path");

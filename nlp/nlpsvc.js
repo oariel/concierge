@@ -31,7 +31,7 @@ var welcome_msg =
     `
 -------------------------------------
  NLP Natural Classification Service
- Copyright(c) Capriza, Inc. 2016
+ Copyright(c) Oren Ariel, Inc. 2019
  Use -h or --help for argument list
 -------------------------------------`;
 

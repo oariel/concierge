@@ -2,7 +2,7 @@
 
 //////////////////////////////////////////////////////////////////////////////
 // Bot Training Module
-// Copyright Capriza Labs 2016
+// Copyright Oren Ariel 2019
 //
 var fs = require('fs');
 var natural = require('natural');
@@ -33,7 +33,7 @@ var welcome_msg =
     `
 ----------------------------------------------------
          Chat Bot Training Utility
-        Copyright(c) Capriza, Inc. 2016
+        Copyright(c) Oren Ariel, Inc. 2019
         Elements Copywrite LBNL 2016
        Use -h or --help for argument list
 ----------------------------------------------------`;
