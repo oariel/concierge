@@ -20,7 +20,7 @@
                 {
                     "name": "Employee information",
                     "fn_name": "spaceiqquery",
-                    "query": "query { viewer { company { search(query: \"{0}\", type: employees) { employees(first: 10) { edges { node { name assets{ url(style: \"thumbnail\") } department { name } team { name } seat { external_id code floor { name code } building { name code } } neighborhoods { name floor { id name code } building { name code } } } } } spaces(first: 10) { edges { node { name code externalId capacity assets{ url(style: \"thumbnail\") } department { name } building { name code } floor { name code } } } } } } } }",
+                    "query": "query { viewer { company { search(query: \"{0}\", type: employees) { employees(first: 10) { edges { node { name assets{ url(style: \"thumbnail\") } department { name } team { name } seat { external_id code floor { name code } building { name code } } neighborhoods { name floor { name code } building { name code } } } } } spaces(first: 10) { edges { node { name code externalId capacity assets{ url(style: \"thumbnail\") } department { name } building { name code } floor { name code } } } } } } } }",
                     "step_result": {
                         "name": "external_id",
                         "value": "external_id",
