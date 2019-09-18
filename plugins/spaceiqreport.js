@@ -51,7 +51,7 @@ var spaceiqreport = {
                                 return cb('err', args);   
                             }
 
-                            var headers = lines[0].split(",");
+                            var headers = lines[1].split(",");
                             for ( var i=1; i<lines.length-1; i++ ) {
                                 var values = lines[i].split(",");
                                 for ( j=0; j<headers.length; j++ )
